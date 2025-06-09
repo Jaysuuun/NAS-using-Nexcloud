@@ -25,7 +25,7 @@
   - **Database:** mariaDB Version 12.0.1
   - **SSL:** Cloudflare Origin Certificate
 
-Since my ISP did not allow access to my router I was unable to port forward. I had to resort to tunnel the connection via cloudflare tunnel, the domain used for this projecct uses clouflare dns.
+Since my ISP does not allow router access, I was unable to set up traditional port forwarding. Instead, I tunneled the connection using Cloudflare Tunnel. The domain used for this project is managed via Cloudflare DNS, and SSL is handled using a Cloudflare Origin Certificate.
 
 
 ## 📦 SETUP
