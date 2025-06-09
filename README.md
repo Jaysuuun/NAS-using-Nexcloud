@@ -37,13 +37,13 @@ You have the option to use a VM, personal computer/laptop, Virtual Private Serve
 
   edit it using a text editor:\
   
-    ```nano /etc/hostname```
+    nano /etc/hostname
 
   inside you will see _localhost_ change it to your domain _(e.g. cloud.jaysun.site)_
 
   edit the host file:\
   
-    ```nano /etc/hosts```
+    nano /etc/hosts
 
   inside the file you will see 127.0.0.1 local host. Under it type 127.0.1.1 your domain name hostname _(e.g. 127.0.1.1 cloud.jaysun.site jay)_
 
@@ -51,7 +51,7 @@ You have the option to use a VM, personal computer/laptop, Virtual Private Serve
 
   using wget:\
   
-    ```wget https://download.nextcloud.com/server/releases/nextcloud-31.0.5.zip```
+    wget https://download.nextcloud.com/server/releases/nextcloud-31.0.5.zip
   manually dowload at:\
   
   [https://download.nextcloud.com/server/releases/nextcloud-31.0.5.zip](https://download.nextcloud.com/server/releases/nextcloud-31.0.5.zip)
@@ -60,15 +60,15 @@ You have the option to use a VM, personal computer/laptop, Virtual Private Serve
 
   download and install:\
   
-    ```sudo apt install mariadb-server```
+    sudo apt install mariadb-server
 
   check status:\
   
-    ```systemctl status mariadb```
+    systemctl status mariadb
 
   This is a security script included with MySQL and MariaDB that helps you quickly harden your database installation by walking you through basic security steps.\
   
-    ```sudo mysql_secure_installation```
+    sudo mysql_secure_installation
     
   🔐 What it does:
 
@@ -86,17 +86,17 @@ You have the option to use a VM, personal computer/laptop, Virtual Private Serve
 
   Enter mariadb:\
   
-    ```sudo mariadb```
+    sudo mariadb
     
   Create a databse:\
   
-    ```CREATE DATABASE nextcloud;```
+    CREATE DATABASE nextcloud;
 
   Grant All previlage on current user for the databse:\
   
-    ```GRANT ALL PREVILEGES ON nextcloud.* TO 'currentuser'@'localhost' IDENTIFIED BY 'mypassword';
+    GRANT ALL PREVILEGES ON nextcloud.* TO 'currentuser'@'localhost' IDENTIFIED BY 'mypassword';
     
-    ```FLUSH PREVILEGES;```
+    FLUSH PREVILEGES;
 
   To exit press ctrl D.\
   
@@ -106,13 +106,13 @@ You have the option to use a VM, personal computer/laptop, Virtual Private Serve
 
   Install apache and php:\
   
-    ```sudo apt install php php-apcu php=-bcmath php-cli php-common php-curl php-gd php-gmp php-imagick php-intl php-mbstring php-mysql php-zip php-xml apache2```
+    sudo apt install php php-apcu php=-bcmath php-cli php-common php-curl php-gd php-gmp php-imagick php-intl php-mbstring php-mysql php-zip php-xml apache2
     
   you can ommit apache2 since php installs it for you anyway but leave it if you have trust issues. 
 
   Check if its running:\
   
-    ```systemctl status apache2```
+    systemctl status apache2
 
   Open you browser and type your domain or localhost you should be seeing an Apchache2 default page. 
 
