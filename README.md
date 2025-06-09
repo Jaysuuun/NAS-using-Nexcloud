@@ -5,14 +5,13 @@
 
 **Guest access**
 
-    [website link](cloud.jaysun.site)
+  [website link](cloud.jaysun.site)
   
-    **username:**
+  **username:**
+  **password:**
   
-    **password:**
-  
-    _Please note that there maybe intances where the server is down_
----
+  _Please note that there maybe intances where the server is down_
+
 ## 🛠️ Hardware & System Specs
   - **Device:** Personal laptop 
   - **CPU:** Ryzen 5 7530u _(3 cores allocated for the vm)_
@@ -28,11 +27,11 @@
 
 Since my ISP did not allow access to my router I was unable to port forward. I had to resort to tunnel the connection via cloudflare tunnel, the domain used for this projecct uses clouflare dns.
 
----
+
 ## 📦 SETUP
 
 
----
+
 ## 🔐 Security Notes
----
+
 ## 📸 Screenshots 
