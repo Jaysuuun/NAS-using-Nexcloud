@@ -1,16 +1,17 @@
 # 🗃️ NAS-using-Nexcloud
 **📌 Overview**
-A personal NAS (Network Attached Storage) setup using Nextcloud, hosted on lubuntu virtual machine running on virtual box, for private file sync, sharing, and media storage.
+
+  A personal NAS (Network Attached Storage) setup using Nextcloud, hosted on lubuntu virtual machine running on virtual box, for private file sync, sharing, and media storage.
 
 **Guest access**
 
-  [website link](cloud.jaysun.site)
+    [website link](cloud.jaysun.site)
   
-  **username:**
+    **username:**
   
-  **password:**
+    **password:**
   
-  _Please note that there maybe intances where the server is down_
+    _Please note that there maybe intances where the server is down_
 ---
 ## 🛠️ Hardware & System Specs
   - **Device:** Personal laptop 
