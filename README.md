@@ -7,8 +7,9 @@
 
   [website link](cloud.jaysun.site)
   
-  **username:**
-  **password:**
+  ...**username:**
+  
+  ...**password:**
   
   _Please note that there maybe intances where the server is down_
 
