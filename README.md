@@ -29,9 +29,12 @@ Since my ISP does not allow router access, I was unable to set up traditional po
 
 
 ## 📦 SETUP
-If you want to replicate the setup here is a setup guide for hosting your own NAS using nextcloud.\
-_Please note that you will need to purchase yourown domain if you plan to deploy it remotely_\
-You have the option to use a VM, personal computer/laptop, Virtual Private Server (VPS), or a dedicated server machine as your host. This setup guide uses lubuntu which is a linux distro, if you plan on host this locally using a windows you might need to look at different guides online as this setup is intended for linux users.\
+If you want to replicate the setup here is a setup guide for hosting your own NAS using nextcloud.
+
+> _Please note that you will need to purchase yourown domain if you plan to deploy it remotely_
+
+
+You have the option to use a VM, personal computer/laptop, Virtual Private Server (VPS), or a dedicated server machine as your host. This setup guide uses lubuntu which is a linux distro, if you plan on host this locally using a windows you might need to look at different guides online as this setup is intended for linux users.
 
 ### 1. Configure system hostname and host
 
