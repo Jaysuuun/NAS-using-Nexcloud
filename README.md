@@ -118,19 +118,151 @@ You have the option to use a VM, personal computer/laptop, Virtual Private Serve
 
 ### 6. Install Nexcloud Files
 
-### 7. Setuo Apache and PHP
+  First unzip the nextcloud zip file, you might want to install this first:
+
+    sudo apt install unzip
+    
+  then unzip the file, I suggest you rename the file to something shorter
+
+    unzip latest.zip
+
+  feel free to change the name of the unzipped folder to whatever you want or most preferably change it to your domain name:
+
+    mv latest.zip cloud.jaysun.site
+
+  Change the ownership and group of the Nextcloud folder to the current user or to the user your Apache server is running as.
+
+    sudo chown www-data:www-data -R cloud.jaysun.site/
+
+  dont run nextcloud from your home dir move it to somewhere else
+
+    sudo mv cloud.jaysun.site /var/www/
+
+  make sure to use `sudo` in case your logged in as a different user as the owner of the dir
+
+    
+### 7. Setup Apache _(make sure to change cloud.jaysun.site to whatever your domain is)_
+
+  First things first we must disable the apache2 default page because we will be replacing that with the nextcloud page instead.
+
+    sudo a2dissite 000-default 
+
+  Create a config file using your domain name to tell apache which page to server:
+
+    sudo nano /etc/apache2/sites-available/cloud.jaysun.site.conf
+
+  Inside the file should contain this make sure to change _cloud.jaysun.site_ to whatever your domain is:
+
+    <VirtualHost *:80>
+           ServerName cloud.jaysun.site
+           DocumentRoot "/var/www/cloud.jaysun.site/"
+      
+           <IfModule mod_headers.c>
+              Header always set Strict-Transport-Security "max-age=15552000; includeSubDomains"
+          </IfModule>
+           
+           <Directory "/var/www/cloud.jaysun.site/">
+               Options MultiViews FollowSymLinks
+               AllowOverride All
+               Require all granted
+           </Directory>
+      
+           Transferlog /var/log/apache2/cloud.jaysun.site_access.log
+           ErrorLog /var/log/apache2/cloud.jaysun.site_error.log
+
+    </VirtualHost>
+
+  After this save it and enable the config file:
+
+      sudo a2ensite cloud.jaysun.site.conf
+
+
+### 8. Setup PHP
+
+  Configure php
+
+      sudo nano /etc/php/8.3/apache2/php.ini
+
+  There will be some values that we will change and uncomment (remove semi-colon ";") find these option in the ini file and change it into the following:
+
+      memory_limit = 512M
+      upload_max_filesize = 1GB (feel free to change to your prefered size)
+      max_execution_time = 360
+      post_max_size = 200M
+      date.timezone = Asia/Manila (find this and uncomment it and set it to your timezone)
+      opcache.enable = 1 (uncomment this and make sure it is set to one) 
+      opache.interned_strings_buffer = 16 (uncomment and set to 16)
+      opache.max_accelerated_files = 10000 (uncomment and leave it at 10000)
+      opcache.memory_consumption = 128 (uncomment and leave it at 128)
+      opcache.save_comments = 1 (uncomment and leave it at 1)
+      opcache.revalidate_freq = 1 (uncomment and set it to 1)
+
+  Save the file
+
+### 9. Enable required Apache Modules
+
+      sudo a2enmod dir env headers mime rewrite ssl
+
+  Restart apache
+
+      sudo systemctl restart apache2
+
+  Now try to search to your browser:
+
+      localhost
+
+  you should see a nextcloud page instead of the default apache
+      
 
 If you are using a VPS, dedicated server or a personal machine and **is able** to **port forward** you might want to follow and contibue the setup at [28:12](https://www.youtube.com/watch?v=fpr37FJSgrw&t=1872s&ab_channel=LearnLinuxTV&t=1692s) otherwise if you are unable or is not allowed by your ISP to port forward you can use tunneling services like [zrok](https://zrok.io/), [ngrok](https://ngrok.com/) and etc. For this project I used [cloudflared tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/create-remote-tunnel/) for the free SSL certificate.
 
+## Setup Cloudflare Tunnel
 
+  1. Install cloudflared tunnel
 
+          sudo apt install cloudflared
 
+  2. Authenticate with cloudflare
 
+          cloudflared login
+     
+  This opens a browser window. Choose your domain and authorize.
+  3. Create a cloudflare tunnel
 
+          cloudflared tunnel create my-tunnel
+        
+  4. Configure Tunnel to Local App and create a config file in `~/.cloudflared/config.yml`
 
+          sudo nano ~/.cloudflared/config.yml
 
+  it should look like this
+
+          tunnel: tunnel-name
+          credentials-file: /home/jaysun13/.cloudflared/tunnel-name.json
+
+          ingress:
+            - hostname: cloud.jaysun.site
+              service: http://localhost
+            - service: http_status:404
+
+  5. Create a DNS route
+
+          cloudflared tunnel route dns tunnel-name cloud.jaysun.site
+
+  6. Run the tunnel
+
+          cloudflared tunnel run my-tunnel
 
 
 ## 🔐 Security Notes
 
-## 📸 Screenshots 
+  - Fail2Ban configured: ✅
+    
+  - Firewall (ufw): enabled and port rules set ✅
+
+
+
+### Please Note
+
+  If you have trouble following this tutorial feel free to what [here](www.youtube.com/watch?v=fpr37FJSgrw&t=1110s&ab_channel=LearnLinuxTV) and follow it instead.
+
