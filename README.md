@@ -35,15 +35,15 @@ You have the option to use a VM, personal computer/laptop, Virtual Private Serve
 
 ### 1. Configure system hostname and host
 
-  edit it using a text editor:
+  - edit it using a text editor:
   
-    nano /etc/hostname
+        nano /etc/hostname
 
-  inside you will see _localhost_ change it to your domain _(e.g. cloud.jaysun.site)_
+  - inside you will see _localhost_ change it to your domain _(e.g. cloud.jaysun.site)_
 
-  edit the host file:
+  - edit the host file:
   
-    nano /etc/hosts
+        nano /etc/hosts
 
   inside the file you will see 127.0.0.1 local host. Under it type 127.0.1.1 your domain name hostname _(e.g. 127.0.1.1 cloud.jaysun.site jay)_
 
