@@ -271,5 +271,5 @@ If you are using a VPS, dedicated server or a personal machine and **is able** t
 
 ### Please Note
 
-  If you have trouble following this tutorial feel free to what [here](www.youtube.com/watch?v=fpr37FJSgrw&t=1110s&ab_channel=LearnLinuxTV) and follow it instead.
+  If you have trouble following this tutorial feel free to watch [here](www.youtube.com/watch?v=fpr37FJSgrw&t=1110s&ab_channel=LearnLinuxTV) and follow it instead.
 
