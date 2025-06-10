@@ -230,6 +230,7 @@ If you are using a VPS, dedicated server or a personal machine and **is able** t
           cloudflared login
      
   This opens a browser window. Choose your domain and authorize.
+  
   3. Create a cloudflare tunnel
 
           cloudflared tunnel create my-tunnel
@@ -238,7 +239,7 @@ If you are using a VPS, dedicated server or a personal machine and **is able** t
 
           sudo nano ~/.cloudflared/config.yml
 
-  it should look like this
+  - it should look like this
 
           tunnel: tunnel-name
           credentials-file: /home/jaysun13/.cloudflared/tunnel-name.json
