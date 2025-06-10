@@ -39,7 +39,7 @@ You have the option to use a VM, personal computer/laptop, Virtual Private Serve
   
         nano /etc/hostname
 
-  - inside you will see _localhost_ change it to your domain _(e.g. cloud.jaysun.site)_
+  inside you will see _localhost_ change it to your domain _(e.g. cloud.jaysun.site)_
 
   - edit the host file:
   
@@ -49,26 +49,27 @@ You have the option to use a VM, personal computer/laptop, Virtual Private Serve
 
 ### 2. Download Nextcloud
 
-  using wget:
+  - using wget:
   
-    wget https://download.nextcloud.com/server/releases/nextcloud-31.0.5.zip
-  manually dowload at:
+        wget https://download.nextcloud.com/server/releases/nextcloud-31.0.5.zip
+    
+  - manually dowload at:
   
-  [https://download.nextcloud.com/server/releases/nextcloud-31.0.5.zip](https://download.nextcloud.com/server/releases/nextcloud-31.0.5.zip)
+    [https://download.nextcloud.com/server/releases/nextcloud-31.0.5.zip](https://download.nextcloud.com/server/releases/nextcloud-31.0.5.zip)
   
 ### 3. Dowload and Setup MariaDB Database
 
-  download and install:
+  - download and install:
   
-    sudo apt install mariadb-server
+        sudo apt install mariadb-server
 
-  check status:
+  - check status:
   
-    systemctl status mariadb
+        systemctl status mariadb
 
-  This is a security script included with MySQL and MariaDB that helps you quickly harden your database installation by walking you through basic security steps.
+  - This is a security script included with MySQL and MariaDB that helps you quickly harden your database installation by walking you through basic security steps.
   
-    sudo mysql_secure_installation
+        sudo mysql_secure_installation
     
   🔐 What it does:
 
@@ -84,19 +85,19 @@ You have the option to use a VM, personal computer/laptop, Virtual Private Serve
 
 ### 4. Create a databse for nextcloud
 
-  Enter mariadb:
+  - Enter mariadb:
   
-    sudo mariadb
+        sudo mariadb
     
-  Create a databse:
+  - Create a databse:
   
-    CREATE DATABASE nextcloud;
+        CREATE DATABASE nextcloud;
 
-  Grant All previlage on current user for the databse:
+  - Grant All previlage on current user for the databse:
   
-    GRANT ALL PREVILEGES ON nextcloud.* TO 'currentuser'@'localhost' IDENTIFIED BY 'mypassword';
-    
-    FLUSH PREVILEGES;
+        GRANT ALL PREVILEGES ON nextcloud.* TO 'currentuser'@'localhost' IDENTIFIED BY 'mypassword';
+        
+        FLUSH PREVILEGES;
 
   To exit press ctrl D.\
   
@@ -104,112 +105,114 @@ You have the option to use a VM, personal computer/laptop, Virtual Private Serve
 
 ### 5. Install Apache2 and PHP
 
-  Install apache and php:
+  - Install apache and php:
   
-    sudo apt install php php-apcu php=-bcmath php-cli php-common php-curl php-gd php-gmp php-imagick php-intl php-mbstring php-mysql php-zip php-xml apache2
+        sudo apt install php php-apcu php=-bcmath php-cli php-common php-curl php-gd php-gmp php-imagick php-intl php-mbstring php-mysql php-zip php-xml apache2
     
   you can ommit apache2 since php installs it for you anyway but leave it if you have trust issues. 
 
-  Check if its running:
+  - Check if its running:
   
-    systemctl status apache2
+        systemctl status apache2
 
   Open you browser and type your domain or localhost you should be seeing an Apchache2 default page. 
 
 ### 6. Install Nexcloud Files
 
-  First unzip the nextcloud zip file, you might want to install this first:
+  - First unzip the nextcloud zip file, you might want to install this first:
 
-    sudo apt install unzip
+        sudo apt install unzip
     
-  then unzip the file, I suggest you rename the file to something shorter
+  - then unzip the file, I suggest you rename the file to something shorter
 
-    unzip latest.zip
+        unzip latest.zip
 
-  feel free to change the name of the unzipped folder to whatever you want or most preferably change it to your domain name:
+  - feel free to change the name of the unzipped folder to whatever you want or most preferably change it to your domain name:
 
-    mv latest.zip cloud.jaysun.site
+        mv latest.zip cloud.jaysun.site
 
-  Change the ownership and group of the Nextcloud folder to the current user or to the user your Apache server is running as.
+  - Change the ownership and group of the Nextcloud folder to the current user or to the user your Apache server is running as.
 
-    sudo chown www-data:www-data -R cloud.jaysun.site/
+        sudo chown www-data:www-data -R cloud.jaysun.site/
 
-  dont run nextcloud from your home dir move it to somewhere else
+  - dont run nextcloud from your home dir move it to somewhere else
 
-    sudo mv cloud.jaysun.site /var/www/
+        sudo mv cloud.jaysun.site /var/www/
 
   make sure to use `sudo` in case your logged in as a different user as the owner of the dir
 
     
 ### 7. Setup Apache _(make sure to change cloud.jaysun.site to whatever your domain is)_
 
-  First things first we must disable the apache2 default page because we will be replacing that with the nextcloud page instead.
+  - First things first we must disable the apache2 default page because we will be replacing that with the nextcloud page instead.
 
-    sudo a2dissite 000-default 
+        sudo a2dissite 000-default 
 
-  Create a config file using your domain name to tell apache which page to server:
+  - Create a config file using your domain name to tell apache which page to server:
 
-    sudo nano /etc/apache2/sites-available/cloud.jaysun.site.conf
+        sudo nano /etc/apache2/sites-available/cloud.jaysun.site.conf
 
-  Inside the file should contain this make sure to change _cloud.jaysun.site_ to whatever your domain is:
+  - Inside the file should contain this make sure to change _cloud.jaysun.site_ to whatever your domain is:
 
-    <VirtualHost *:80>
-           ServerName cloud.jaysun.site
-           DocumentRoot "/var/www/cloud.jaysun.site/"
-      
-           <IfModule mod_headers.c>
-              Header always set Strict-Transport-Security "max-age=15552000; includeSubDomains"
-          </IfModule>
-           
-           <Directory "/var/www/cloud.jaysun.site/">
-               Options MultiViews FollowSymLinks
-               AllowOverride All
-               Require all granted
-           </Directory>
-      
-           Transferlog /var/log/apache2/cloud.jaysun.site_access.log
-           ErrorLog /var/log/apache2/cloud.jaysun.site_error.log
+        <VirtualHost *:80>
+               ServerName cloud.jaysun.site
+               DocumentRoot "/var/www/cloud.jaysun.site/"
+          
+               <IfModule mod_headers.c>
+                  Header always set Strict-Transport-Security "max-age=15552000; includeSubDomains"
+              </IfModule>
+               
+               <Directory "/var/www/cloud.jaysun.site/">
+                   Options MultiViews FollowSymLinks
+                   AllowOverride All
+                   Require all granted
+               </Directory>
+          
+               Transferlog /var/log/apache2/cloud.jaysun.site_access.log
+               ErrorLog /var/log/apache2/cloud.jaysun.site_error.log
+    
+        </VirtualHost>
 
-    </VirtualHost>
+  - After this save it and enable the config file:
 
-  After this save it and enable the config file:
-
-      sudo a2ensite cloud.jaysun.site.conf
+        sudo a2ensite cloud.jaysun.site.conf
 
 
 ### 8. Setup PHP
 
-  Configure php
+  -  Configure php
 
-      sudo nano /etc/php/8.3/apache2/php.ini
+          sudo nano /etc/php/8.3/apache2/php.ini
 
-  There will be some values that we will change and uncomment (remove semi-colon ";") find these option in the ini file and change it into the following:
+  - There will be some values that we will change and uncomment (remove semi-colon ";") find these option in the ini file and change it into the following:
 
-      memory_limit = 512M
-      upload_max_filesize = 1GB (feel free to change to your prefered size)
-      max_execution_time = 360
-      post_max_size = 200M
-      date.timezone = Asia/Manila (find this and uncomment it and set it to your timezone)
-      opcache.enable = 1 (uncomment this and make sure it is set to one) 
-      opache.interned_strings_buffer = 16 (uncomment and set to 16)
-      opache.max_accelerated_files = 10000 (uncomment and leave it at 10000)
-      opcache.memory_consumption = 128 (uncomment and leave it at 128)
-      opcache.save_comments = 1 (uncomment and leave it at 1)
-      opcache.revalidate_freq = 1 (uncomment and set it to 1)
+        memory_limit = 512M
+        upload_max_filesize = 1GB (feel free to change to your prefered size)
+        max_execution_time = 360
+        post_max_size = 200M
+        date.timezone = Asia/Manila (find this and uncomment it and set it to your timezone)
+        opcache.enable = 1 (uncomment this and make sure it is set to one) 
+        opache.interned_strings_buffer = 16 (uncomment and set to 16)
+        opache.max_accelerated_files = 10000 (uncomment and leave it at 10000)
+        opcache.memory_consumption = 128 (uncomment and leave it at 128)
+        opcache.save_comments = 1 (uncomment and leave it at 1)
+        opcache.revalidate_freq = 1 (uncomment and set it to 1)
 
   Save the file
 
 ### 9. Enable required Apache Modules
 
-      sudo a2enmod dir env headers mime rewrite ssl
+  - Enable required modules
+    
+        sudo a2enmod dir env headers mime rewrite ssl
 
-  Restart apache
+  - Restart apache
 
-      sudo systemctl restart apache2
+        sudo systemctl restart apache2
 
-  Now try to search to your browser:
+  - Now try to search to your browser:
 
-      localhost
+          localhost
 
   you should see a nextcloud page instead of the default apache
       
