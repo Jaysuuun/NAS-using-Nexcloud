@@ -73,11 +73,11 @@ You have the option to use a VM, personal computer/laptop, Virtual Private Serve
     
   🔐 What it does:
 
-  - Set or change the root password (if not already set).\
-  - Remove anonymous users (to prevent anyone from logging in without a user account).\
-  - Disallow remote root login (optional but recommended for security).\
-  - Remove the test database (which is often installed by default and accessible to all users).\
-  - Reload privilege tables (to ensure changes take effect immediately).\
+  - Set or change the root password (if not already set).
+  - Remove anonymous users (to prevent anyone from logging in without a user account).
+  - Disallow remote root login (optional but recommended for security).
+  - Remove the test database (which is often installed by default and accessible to all users).
+  - Reload privilege tables (to ensure changes take effect immediately).
     
   It’s a good first step after installing MySQL or MariaDB, especially on a production or public-facing server.
 
